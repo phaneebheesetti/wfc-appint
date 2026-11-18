@@ -4,6 +4,20 @@ components:
     name: WFC
     kind: web_ui
     directory: .
+    stack:
+      choices:
+        styling: Tailwind CSS
+        database: PostgreSQL
+        language: JavaScript/TypeScript
+        framework: Next.js
+        package_manager: yarn
+        testing_tool_e2e: Playwright
   comp_relational_database:
     name: Relational Database
     kind: managed_service
+    stack:
+      choices:
+        managed_service: Supabase (hosted PostgreSQL)
+      notes: 'Named by the architecture: hosted Postgres on Supabase with row-level
+        security, accessed via Drizzle ORM and the Supabase service-role client; backups
+        managed by Supabase.'
