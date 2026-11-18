@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App shell — World's Finest Chocolate</title>
+<link rel="stylesheet" href="../styles/globals.css">
+<link rel="stylesheet" href="prototype-utils.css">
+<style>
+  /* Shell-only rules. Mirrors the dashboard layout: a 14rem sidebar (header, nav, account footer) beside an inset content area. */
+  body { margin: 0; overflow-x: hidden; }
+  [data-arc-shell] {
+    display: grid; min-height: 100vh; max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: "header" "nav" "main" "footer";
+  }
+  .shell-header, .shell-nav, .shell-footer { background: hsl(var(--sidebar-background)); color: hsl(var(--sidebar-foreground)); min-width: 0; }
+  .shell-header { grid-area: header; display: flex; align-items: center; justify-content: space-between; gap: calc(var(--radius) * 1); padding: calc(var(--radius) * 1.5) calc(var(--radius) * 2); border-bottom: thin solid hsl(var(--sidebar-border)); }
+  .shell-logo-link { display: flex; align-items: center; min-width: 0; min-height: 2.75rem; text-decoration: none; }
+  .shell-menu-btn { flex-shrink: 0; min-width: 2.75rem; min-height: 2.75rem; }
+  .shell-link, .shell-group > summary, .shell-account { min-height: 2.75rem; }
+  .shell-logo-box { display: flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: calc(var(--radius) * 1); background: hsl(var(--card)); border: thin solid hsl(var(--border)); border-radius: calc(var(--radius) * 1.5); }
+  .shell-logo { display: block; width: calc(var(--radius) * 24); max-width: 100%; height: auto; }
+  .shell-nav { grid-area: nav; padding: calc(var(--radius) * 1); border-bottom: thin solid hsl(var(--sidebar-border)); overflow-y: auto; }
+  .shell-nav[hidden] { display: none !important; }
+  .shell-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(var(--radius) * 0.25); }
+  .shell-link, .shell-group > summary {
+    display: flex; align-items: center; gap: calc(var(--radius) * 1); width: 100%; min-width: 0;
+    padding: calc(var(--radius) * 1) calc(var(--radius) * 1.5); border-radius: calc(var(--radius) - calc(var(--radius) * 0.25));
+    color: hsl(var(--sidebar-foreground)); font-size: 0.875rem; text-decoration: none; cursor: pointer; list-style: none;
+  }
+  .shell-group > summary::-webkit-details-marker { display: none; }
+  .shell-link:hover, .shell-group > summary:hover { background: hsl(var(--sidebar-hover)); color: hsl(var(--sidebar-hover-foreground)); }
+  .shell-link:focus-visible, .shell-group > summary:focus-visible { outline: calc(var(--radius) * 0.25) solid hsl(var(--sidebar-ring)); outline-offset: calc(var(--radius) * -0.25); }
+  .shell-link[aria-current="page"] { background: hsl(var(--sidebar-accent)); color: hsl(var(--sidebar-accent-foreground)); font-weight: 500; }
+  .shell-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
+  .shell-ext { margin-left: auto; opacity: 0.7; }
+  .shell-chevron { margin-left: auto; transition: transform 0.2s; }
+  .shell-group[open] > summary .shell-chevron { transform: rotate(90deg); }
+  .shell-sub { list-style: none; margin: calc(var(--radius) * 0.25) 0 0 calc(var(--radius) * 2); padding: 0 0 0 calc(var(--radius) * 1); border-left: thin solid hsl(var(--sidebar-border)); display: flex; flex-direction: column; gap: calc(var(--radius) * 0.25); }
+  .shell-sub .shell-link { padding-top: calc(var(--radius) * 0.75); padding-bottom: calc(var(--radius) * 0.75); }
+  .shell-org { font-weight: 500; }
+  .shell-footer { grid-area: footer; padding: calc(var(--radius) * 1); border-top: thin solid hsl(var(--sidebar-border)); }
+  .shell-footer .dropdown { display: block; }
+  .shell-account { display: flex; align-items: center; gap: calc(var(--radius) * 1); width: 100%; min-width: 0; padding: calc(var(--radius) * 1); border: 0; border-radius: calc(var(--radius) * 1); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+  .shell-account:hover { background: hsl(var(--sidebar-hover)); }
+  .shell-account:focus-visible { outline: calc(var(--radius) * 0.25) solid hsl(var(--sidebar-ring)); }
+  .shell-account-text { display: flex; flex-direction: column; flex: 1; min-width: 0; line-height: 1.25; }
+  .shell-main { grid-area: main; min-width: 0; width: 100%; max-width: 96rem; margin-inline: auto; padding: calc(var(--radius) * 2) calc(var(--radius) * 2) calc(var(--radius) * 4); }
+  [data-arc-content] { min-height: calc(var(--radius) * 20); }
+
+  @media (min-width: 48rem) {
+    [data-arc-shell] {
+      grid-template-columns: 14rem minmax(0, 1fr);
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: "header main" "nav main" "footer main";
+    }
+    .shell-header { border-bottom: 0; padding: calc(var(--radius) * 2) calc(var(--radius) * 1.5) calc(var(--radius) * 1); }
+    .shell-header, .shell-nav, .shell-footer { border-right: thin solid hsl(var(--sidebar-border)); }
+    .shell-nav, .shell-nav[hidden] { display: block !important; border-bottom: 0; padding-top: calc(var(--radius) * 1); }
+    .shell-menu-btn { display: none; }
+    .shell-link, .shell-group > summary, .shell-account { min-height: 2rem; }
+    .shell-logo { width: 100%; }
+    .shell-main { padding: calc(var(--radius) * 3) calc(var(--radius) * 3) calc(var(--radius) * 4); }
+  }
+</style>
+</head>
+<body>
+<div data-arc-shell>
+
+  <header class="shell-header" data-arc-shell-part="header">
+    <a class="shell-logo-link" href="#" aria-label="World's Finest Chocolate — Dashboard">
+      <span class="shell-logo-box"><img class="shell-logo" src="../../public/logo/wfc-logo.png" alt="World's Finest Chocolate"></span>
+    </a>
+    <button class="btn btn-ghost btn-icon shell-menu-btn" type="button" data-toggle="app-nav" aria-controls="app-nav" aria-label="Open menu">
+      <svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </header>
+
+  <nav class="shell-nav" id="app-nav" data-arc-shell-part="nav" aria-label="Main" hidden>
+    <ul class="shell-list">
+      <li><a class="shell-link" href="#" data-nav-key="dashboard"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8v10H3zM9 21v-6h6v6"/></svg><span>Dashboard</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="users"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M16 4.5a3.5 3.5 0 010 7M18 15c2.5.7 4 2.5 4 6"/></svg><span>Members</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="organizations"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V3h10v18M14 9h6v12M8 7h2M8 11h2M8 15h2M3 21h18"/></svg><span>Organizations</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="campaigns"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4l12 5V5zM15 9h3a3 3 0 010 6h-3M6 14l1 6"/></svg><span>Fundraisers</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="prizes"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v6a5 5 0 01-10 0zM7 6H3v2a3 3 0 004 3M17 6h4v2a3 3 0 01-4 3M12 15v4M8 21h8"/></svg><span>Prizes</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="payments"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2zM9 8h6M9 12h6"/></svg><span>Payments</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="documents"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/></svg><span>Permission Slips</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="inventory"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v6a5 5 0 01-10 0zM7 6H3v2a3 3 0 004 3M17 6h4v2a3 3 0 01-4 3M12 15v4M8 21h8"/></svg><span>Inventory</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="chat"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5"/></svg><span>Messages</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="payment-portal" target="_blank" rel="noopener"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg><span>Payment Portal</span><span class="shell-ext" aria-hidden="true">&#8599;</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="documentation" target="_blank" rel="noopener"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4zM20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/></svg><span>Documentation</span><span class="shell-ext" aria-hidden="true">&#8599;</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="permissions"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4"/></svg><span>Permissions</span></a></li>
+      <li><a class="shell-link" href="#" data-nav-key="email-templates"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Email Templates</span></a></li>
+      <li>
+        <details class="shell-group" open>
+          <summary data-nav-key="my-fundraisers"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4l12 5V5zM15 9h3a3 3 0 010 6h-3M6 14l1 6"/></svg><span>Fundraisers</span><svg class="shell-icon shell-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></summary>
+          <ul class="shell-sub">
+            <li>
+              <a class="shell-link shell-org" href="#"><svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V3h10v18M14 9h6v12M8 7h2M8 11h2M8 15h2M3 21h18"/></svg><span class="truncate">Lincoln Elementary PTA</span></a>
+              <ul class="shell-sub">
+                <li><a class="shell-link" href="#"><span class="truncate">Spring Chocolate Drive</span></a></li>
+                <li><a class="shell-link" href="#"><span class="truncate">Fall Fundraiser</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="shell-main">
+    <div data-arc-content></div>
+  </main>
+
+  <footer class="shell-footer" data-arc-shell-part="footer">
+    <div class="dropdown" data-menu>
+      <button class="shell-account" type="button" data-nav-key="account" aria-haspopup="menu">
+        <span class="avatar avatar-sm" aria-hidden="true">AM</span>
+        <span class="shell-account-text">
+          <span class="truncate font-semibold text-sm">Alex Morgan</span>
+          <span class="truncate text-xs text-muted">Organization Admin</span>
+        </span>
+        <svg class="shell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
+      </button>
+      <div class="dropdown-menu dropdown-menu-up" role="menu" hidden>
+        <div class="dropdown-label">Switch Role</div>
+        <button class="dropdown-item" type="button" role="menuitemradio" aria-checked="true">Organization Admin</button>
+        <button class="dropdown-item" type="button" role="menuitemradio" aria-checked="false">Parent</button>
+        <hr class="divider">
+        <a class="dropdown-item" href="#" role="menuitem" data-nav-key="profile">Profile</a>
+        <hr class="divider">
+        <button class="dropdown-item" type="button" role="menuitem">Log out</button>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style guide — World's Finest Chocolate</title>
+<link rel="stylesheet" href="../styles/globals.css">
+<link rel="stylesheet" href="prototype-utils.css">
+<style>
+  /* Style-guide-only layout. */
+  body { overflow-x: hidden; }
+  .sg { max-width: 72rem; margin: 0 auto; padding: calc(var(--radius) * 3) calc(var(--radius) * 2) calc(var(--radius) * 8); }
+  .sg section { margin-top: calc(var(--radius) * 8); }
+  .sg h2 { padding-bottom: calc(var(--radius) * 1); border-bottom: thin solid hsl(var(--border)); margin-bottom: calc(var(--radius) * 3); }
+  .sg h3 { margin: calc(var(--radius) * 3) 0 calc(var(--radius) * 1.5); }
+  .sg code { font-size: 0.8125rem; background: hsl(var(--accent)); padding: 0 calc(var(--radius) * 0.5); border-radius: calc(var(--radius) * 0.5); }
+  .sw { display: flex; flex-direction: column; border: thin solid hsl(var(--border)); border-radius: calc(var(--radius) * 1.5); overflow: hidden; background: hsl(var(--card)); min-width: 0; }
+  .sw-chip { height: calc(var(--radius) * 8); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; }
+  .sw-meta { padding: calc(var(--radius) * 1); font-size: 0.75rem; overflow-wrap: anywhere; }
+  .sw-meta b { display: block; font-size: 0.8125rem; }
+  .pal { background: hsl(var(--foreground)); }
+  .shadow-box { height: calc(var(--radius) * 10); border-radius: calc(var(--radius) * 2.75); background: hsl(var(--card)); display: flex; align-items: center; justify-content: center; font-size: 0.8125rem; }
+  .demo { padding: calc(var(--radius) * 2); border: thin dashed hsl(var(--input)); border-radius: calc(var(--radius) * 1.5); background: hsl(var(--card)); }
+  .demo-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: hsl(var(--muted-foreground)); margin-bottom: calc(var(--radius) * 1); }
+  .demo-frame { position: relative; transform: translateZ(0); height: calc(var(--radius) * 40); overflow: hidden; border: thin solid hsl(var(--border)); border-radius: calc(var(--radius) * 1.5); background: hsl(var(--background)); }
+  .demo-frame-sm { height: calc(var(--radius) * 24); }
+  .demo-menu-space { min-height: calc(var(--radius) * 24); }
+  .demo-menu-static .dropdown-menu { position: static; }
+  .shell-link-demo { display: inline-block; }
+  .guidelines ol, .guidelines ul { padding-left: calc(var(--radius) * 3); }
+  .guidelines li { margin-bottom: calc(var(--radius) * 1); }
+  .guidelines table { border-collapse: collapse; width: 100%; font-size: 0.875rem; display: block; overflow-x: auto; }
+  .guidelines th, .guidelines td { text-align: left; vertical-align: top; padding: calc(var(--radius) * 1); border-bottom: thin solid hsl(var(--border)); }
+  .brand-box { display: flex; align-items: center; justify-content: center; padding: calc(var(--radius) * 3); background: hsl(var(--card)); border: thin solid hsl(var(--border)); border-radius: calc(var(--radius) * 2.75); }
+  .brand-box img { height: calc(var(--radius) * 20); width: auto; }
+</style>
+</head>
+<body>
+<div class="sg">
+
+<header class="stack-sm">
+  <h1>World's Finest Chocolate — style guide</h1>
+  <p class="text-muted">This page adopts the project's existing design language and doesn't change it. The adopted files are <code>src/styles/globals.css</code> (tokens), <code>tailwind.config.ts</code> (token source), and <code>public/logo/w-logo.svg</code> (logo). The component set is in <code>prototype-utils.css</code>, the app frame is in <code>app-shell.html</code>, and the rules are in <code>UI-GUIDELINES.md</code>.</p>
+</header>
+
+<!-- ================= TOKENS ================= -->
+<section id="tokens">
+  <h2>Design tokens</h2>
+
+  <h3>Surface and text</h3>
+  <div class="grid grid-4">
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--background));color:hsl(var(--foreground))">Aa</div><div class="sw-meta"><b>--background</b>40 78.9% 96.3%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--foreground));color:hsl(var(--background))">Aa</div><div class="sw-meta"><b>--foreground</b>1 37.5% 31.4%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--card));color:hsl(var(--card-foreground))">Aa</div><div class="sw-meta"><b>--card / --card-foreground</b>0 0% 100% / 222.2 84% 4.9%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--popover));color:hsl(var(--popover-foreground))">Aa</div><div class="sw-meta"><b>--popover / --popover-foreground</b>0 0% 100% / 1 37.5% 31.4%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--muted));color:hsl(var(--muted-foreground))">Aa</div><div class="sw-meta"><b>--muted / --muted-foreground</b>210 40% 96.1% / 23.8 19.2% 51%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--accent));color:hsl(var(--accent-foreground))">Aa</div><div class="sw-meta"><b>--accent / --accent-foreground</b>30 40% 96.1% / 1 37.5% 31.4%</div></div>
+  </div>
+
+  <h3>Brand action</h3>
+  <div class="grid grid-4">
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--primary));color:hsl(var(--primary-foreground))">Primary</div><div class="sw-meta"><b>--primary / --primary-foreground</b>1 37.5% 31.4% / 32 68% 96%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--primary-hover));color:hsl(var(--primary-foreground))">Hover</div><div class="sw-meta"><b>--primary-hover</b>1 37.5% 26%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--secondary));color:hsl(var(--secondary-foreground))">Secondary</div><div class="sw-meta"><b>--secondary / --secondary-foreground</b>0 0% 100% / 1 37.5% 31.4%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--ring));color:hsl(var(--background))">Ring</div><div class="sw-meta"><b>--ring</b>222.2 84% 4.9%</div></div>
+  </div>
+
+  <h3>Status</h3>
+  <div class="grid grid-3">
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--success));color:hsl(var(--success-foreground))">Success</div><div class="sw-meta"><b>--success / --success-foreground</b>142 76.2% 36.3% / 210 40% 98%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--warning));color:hsl(var(--warning-foreground))">Warning</div><div class="sw-meta"><b>--warning / --warning-foreground</b>32.1 94.6% 43.7% / 210 40% 98%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--destructive));color:hsl(var(--destructive-foreground))">Destructive</div><div class="sw-meta"><b>--destructive / --destructive-foreground</b>0 72.2% 50.6% / 210 40% 98%</div></div>
+  </div>
+
+  <h3>Borders and inputs</h3>
+  <div class="grid grid-4">
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--border))"></div><div class="sw-meta"><b>--border</b>41.4 47.5% 88%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--input))"></div><div class="sw-meta"><b>--input</b>40 41% 79%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--input-background))"></div><div class="sw-meta"><b>--input-background</b>0 0% 100%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--input-background-active));color:hsl(var(--primary-foreground))">Focus</div><div class="sw-meta"><b>--input-background-active</b>357 53% 32%</div></div>
+  </div>
+
+  <h3>Charts</h3>
+  <div class="grid grid-4">
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--chart-1))"></div><div class="sw-meta"><b>--chart-1</b>12 76% 61%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--chart-2))"></div><div class="sw-meta"><b>--chart-2</b>173 58% 39%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--chart-3))"></div><div class="sw-meta"><b>--chart-3</b>197 37% 24%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--chart-4))"></div><div class="sw-meta"><b>--chart-4</b>43 74% 66%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--chart-5))"></div><div class="sw-meta"><b>--chart-5</b>27 87% 67%</div></div>
+  </div>
+
+  <h3>Sidebar</h3>
+  <div class="grid grid-4">
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--sidebar-background));color:hsl(var(--sidebar-foreground))">Aa</div><div class="sw-meta"><b>--sidebar-background / --sidebar-foreground</b>40 82% 98% / 1 37.5% 31.4%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--sidebar-primary));color:hsl(var(--sidebar-primary-foreground))">Aa</div><div class="sw-meta"><b>--sidebar-primary / --sidebar-primary-foreground</b>240 5.9% 10% / 0 0% 98%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--sidebar-accent));color:hsl(var(--sidebar-accent-foreground))">Current</div><div class="sw-meta"><b>--sidebar-accent / --sidebar-accent-foreground</b>1 37.5% 31.4% / 0 0% 100%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--sidebar-hover));color:hsl(var(--sidebar-hover-foreground))">Hover</div><div class="sw-meta"><b>--sidebar-hover / --sidebar-hover-foreground</b>40 78.9% 96.3% / 1 37.5% 31.4%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--sidebar-border))"></div><div class="sw-meta"><b>--sidebar-border</b>41.4 47.5% 88%</div></div>
+    <div class="sw"><div class="sw-chip" style="background:hsl(var(--sidebar-ring))"></div><div class="sw-meta"><b>--sidebar-ring</b>217.2 91.2% 59.8%</div></div>
+  </div>
+
+  <h3>Radius and elevation</h3>
+  <p class="text-muted text-sm">--radius is 0.5rem. Tailwind derives radius-sm (radius − 4px), radius-md (radius − 2px) and radius-lg (radius), plus chip 8px, control 12px and card 22px.</p>
+  <div class="grid grid-4" style="margin-top:calc(var(--radius)*1.5)">
+    <div class="shadow-box" style="box-shadow:var(--elev-1)">--elev-1</div>
+    <div class="shadow-box" style="box-shadow:var(--elev-2)">--elev-2</div>
+    <div class="shadow-box" style="box-shadow:var(--elev-3)">--elev-3</div>
+    <div class="shadow-box" style="box-shadow:var(--shadow-hero)">--shadow-hero</div>
+  </div>
+  <div class="cluster" style="margin-top:calc(var(--radius)*2)">
+    <div class="shadow-box" style="width:8rem;border-radius:calc(var(--radius) - calc(var(--radius)*0.5));border:thin solid hsl(var(--border))">sm</div>
+    <div class="shadow-box" style="width:8rem;border-radius:calc(var(--radius) - calc(var(--radius)*0.25));border:thin solid hsl(var(--border))">md</div>
+    <div class="shadow-box" style="width:8rem;border-radius:var(--radius);border:thin solid hsl(var(--border))">lg (--radius)</div>
+    <div class="shadow-box" style="width:8rem;border-radius:calc(var(--radius)*1);border:thin solid hsl(var(--border))">chip</div>
+    <div class="shadow-box" style="width:8rem;border-radius:calc(var(--radius)*1.5);border:thin solid hsl(var(--border))">control</div>
+    <div class="shadow-box" style="width:8rem;border-radius:calc(var(--radius)*2.75);border:thin solid hsl(var(--border))">card</div>
+  </div>
+
+  <h3>Tailwind palette (illustration and role tints)</h3>
+  <p class="text-muted text-sm">Fixed values from <code>tailwind.config.ts</code>; not theme tokens.</p>
+  <div class="grid grid-4" style="margin-top:calc(var(--radius)*1.5)">
+    <div class="sw"><div class="sw-chip" style="background:rgb(125,38,42);color:rgb(255,255,255)">800</div><div class="sw-meta"><b>brown-800</b>rgb(125, 38, 42)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(153,67,67);color:rgb(255,255,255)">700</div><div class="sw-meta"><b>brown-700</b>rgb(153, 67, 67)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(224,128,125)">400</div><div class="sw-meta"><b>brown-400</b>rgb(224, 128, 125)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,148,238)">300</div><div class="sw-meta"><b>pink-300</b>rgb(255, 148, 238)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,167,245)">200</div><div class="sw-meta"><b>pink-200</b>rgb(255, 167, 245)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,217,255)">50</div><div class="sw-meta"><b>pink-50</b>rgb(255, 217, 255)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,241,133)">200</div><div class="sw-meta"><b>yellow-200</b>rgb(255, 241, 133)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,245,165)">50</div><div class="sw-meta"><b>yellow-50</b>rgb(255, 245, 165)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,155,112)">300</div><div class="sw-meta"><b>orange-300</b>rgb(255, 155, 112)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,200,162)">100</div><div class="sw-meta"><b>orange-100</b>rgb(255, 200, 162)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(255,225,189)">50</div><div class="sw-meta"><b>orange-50</b>rgb(255, 225, 189)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(167,211,255)">200</div><div class="sw-meta"><b>blue-200</b>rgb(167, 211, 255)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(189,225,255)">100</div><div class="sw-meta"><b>blue-100</b>rgb(189, 225, 255)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(229,244,255)">50</div><div class="sw-meta"><b>blue-50</b>rgb(229, 244, 255)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:rgb(252,246,239)">50</div><div class="sw-meta"><b>creamy-50</b>rgb(252, 246, 239)</div></div>
+  </div>
+
+  <h3>Typography</h3>
+  <div class="stack-sm">
+    <h1>Heading 1 — Rethink Sans 600</h1>
+    <h2 style="border:0;padding:0;margin:0">Heading 2 — Fundraisers</h2>
+    <h3 style="margin:0">Heading 3 — Spring Chocolate Drive</h3>
+    <p>Body text — the sweetest way to bring profit to your organization and smiles to your community.</p>
+    <p class="text-sm text-muted">Small muted text — 0.875rem, <code>.text-sm.text-muted</code></p>
+    <p class="text-xs">Extra small — <code>.text-xs</code></p>
+    <p class="font-semibold">Semibold — <code>.font-semibold</code></p>
+    <p class="font-script" style="font-size:2.25rem">World's Finest Chocolate — <code>.font-script</code> (Mr Dafoe)</p>
+    <p class="truncate" style="max-width:16rem"><code>.truncate</code> — a very long organization name that gets cut off</p>
+    <p>Screen-reader-only text follows: <span class="sr-only">hidden label</span> <code>.sr-only</code></p>
+  </div>
+
+  <h3>Brand assets</h3>
+  <div class="brand-box"><img src="../../public/logo/w-logo.svg" alt="W logo"></div>
+  <p class="text-muted text-sm" style="margin-top:calc(var(--radius)*1)"><code>public/logo/w-logo.svg</code></p>
+</section>
+
+<!-- ================= LAYOUT ================= -->
+<section id="layout">
+  <h2>Layout helpers</h2>
+  <div class="grid grid-3">
+    <div class="demo"><div class="demo-label">.stack</div><div class="stack"><span class="chip">One</span><span class="chip">Two</span><span class="chip">Three</span></div></div>
+    <div class="demo"><div class="demo-label">.stack.stack-sm</div><div class="stack stack-sm"><span class="chip">One</span><span class="chip">Two</span><span class="chip">Three</span></div></div>
+    <div class="demo"><div class="demo-label">.stack.stack-lg</div><div class="stack stack-lg"><span class="chip">One</span><span class="chip">Two</span><span class="chip">Three</span></div></div>
+  </div>
+  <div class="grid grid-2" style="margin-top:calc(var(--radius)*2)">
+    <div class="demo"><div class="demo-label">.cluster</div><div class="cluster"><span class="badge">One</span><span class="badge">Two</span><span class="badge">Three</span></div></div>
+    <div class="demo"><div class="demo-label">.cluster.cluster-sm.cluster-between</div><div class="cluster cluster-sm cluster-between"><span class="badge">Left</span><span class="badge">Right</span></div></div>
+  </div>
+  <div class="demo" style="margin-top:calc(var(--radius)*2)">
+    <div class="demo-label">.grid.grid-2 / .grid-3 / .grid-4 (one column on phones)</div>
+    <div class="stack">
+      <div class="grid grid-2"><div class="card">A</div><div class="card">B</div></div>
+      <div class="grid grid-3"><div class="card">A</div><div class="card">B</div><div class="card">C</div></div>
+      <div class="grid grid-4"><div class="card">A</div><div class="card">B</div><div class="card">C</div><div class="card">D</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BUTTONS ================= -->
+<section id="buttons">
+  <h2>Buttons</h2>
+  <div class="stack">
+    <div class="cluster">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn">Default (.btn)</button>
+    </div>
+    <div class="cluster">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary">Default</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+      <button class="btn btn-secondary btn-icon btn-sm" aria-label="Add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="btn btn-secondary btn-icon" aria-label="Add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="btn btn-secondary btn-icon btn-lg" aria-label="Add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+    </div>
+    <div class="cluster">
+      <button class="btn btn-primary" disabled>Disabled</button>
+      <button class="btn btn-secondary" disabled>Disabled</button>
+      <button class="btn btn-ghost" disabled>Disabled</button>
+      <button class="btn btn-danger" disabled>Disabled</button>
+      <button class="btn btn-primary" disabled><span class="spinner" style="width:1rem;height:1rem"></span> Saving</button>
+    </div>
+    <p class="text-sm text-muted">Press Tab to see the <code>:focus-visible</code> ring on any button.</p>
+  </div>
+</section>
+
+<!-- ================= FORMS ================= -->
+<section id="forms">
+  <h2>Form controls</h2>
+  <div class="grid grid-2">
+    <div class="stack">
+      <div class="field"><label for="f1">Fundraiser name</label><input id="f1" class="input" placeholder="Spring Chocolate Drive"><span class="field-hint">Shown to parents and participants.</span></div>
+      <div class="field is-invalid"><label for="f2">Email</label><input id="f2" class="input is-invalid" value="alex@school" aria-invalid="true"><span class="field-hint">We'll send the invitation here.</span><span class="field-error">Enter a full email address, like alex@school.org.</span></div>
+      <div class="field"><label for="f3">Disabled</label><input id="f3" class="input" value="Locked value" disabled></div>
+      <div class="field"><label for="f4">Notes</label><textarea id="f4" class="textarea" placeholder="Anything we should know?"></textarea></div>
+      <div class="field is-invalid"><label for="f5">Notes (error)</label><textarea id="f5" class="textarea is-invalid"></textarea><span class="field-error">Add a short note.</span></div>
+      <div class="field"><label for="f6">Textarea disabled</label><textarea id="f6" class="textarea" disabled>Not editable</textarea></div>
+    </div>
+    <div class="stack">
+      <div class="field"><label for="s1">Organization</label><select id="s1" class="select"><option>Lincoln Elementary PTA</option><option>Westside Soccer Club</option></select></div>
+      <div class="field is-invalid"><label for="s2">Role</label><select id="s2" class="select is-invalid"><option>Choose a role</option></select><span class="field-error">Choose a role.</span></div>
+      <div class="field"><label for="s3">Select disabled</label><select id="s3" class="select" disabled><option>Parent</option></select></div>
+      <div class="stack-sm stack">
+        <span class="field-label">Checkboxes (<code>.checkbox</code>, <code>.choice</code>)</span>
+        <label class="choice"><input type="checkbox" class="checkbox" checked> Send me updates</label>
+        <label class="choice"><input type="checkbox" class="checkbox"> Unchecked</label>
+        <label class="choice"><input type="checkbox" class="checkbox is-invalid"> Invalid — accept the terms</label>
+        <label class="choice"><input type="checkbox" class="checkbox" disabled checked> Disabled</label>
+      </div>
+      <div class="stack-sm stack">
+        <span class="field-label">Radios (<code>.radio</code>)</span>
+        <label class="choice"><input type="radio" class="radio" name="r1" checked> Pay by card</label>
+        <label class="choice"><input type="radio" class="radio" name="r1"> Pay by cash</label>
+        <label class="choice"><input type="radio" class="radio" name="r2" disabled> Disabled</label>
+      </div>
+      <div class="stack-sm stack">
+        <span class="field-label">Switches (<code>.switch</code>)</span>
+        <label class="choice"><input type="checkbox" role="switch" class="switch" checked> On</label>
+        <label class="choice"><input type="checkbox" role="switch" class="switch"> Off</label>
+        <label class="choice"><input type="checkbox" role="switch" class="switch is-invalid"> Invalid</label>
+        <label class="choice"><input type="checkbox" role="switch" class="switch" disabled> Disabled</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENUS & NAVIGATION ================= -->
+<section id="menus">
+  <h2>Dropdown, menu, tabs, accordion</h2>
+  <div class="grid grid-2">
+    <div class="demo demo-menu-space">
+      <div class="demo-label">.dropdown — open, with a checked item</div>
+      <div class="dropdown" data-menu>
+        <button class="btn btn-secondary" type="button" aria-haspopup="menu" aria-expanded="true">Switch role</button>
+        <div class="dropdown-menu is-open" role="menu">
+          <div class="dropdown-label">Switch Role</div>
+          <button class="dropdown-item" role="menuitemradio" aria-checked="true" type="button">Organization Admin</button>
+          <button class="dropdown-item" role="menuitemradio" aria-checked="false" type="button">Parent</button>
+          <button class="dropdown-item" role="menuitem" aria-disabled="true" type="button">Disabled item</button>
+          <hr class="divider">
+          <button class="dropdown-item is-danger" role="menuitem" type="button">Log out</button>
+        </div>
+      </div>
+    </div>
+    <div class="demo demo-menu-space">
+      <div class="demo-label">.dropdown — closed (<code>hidden</code>), aligned end / opening up</div>
+      <div class="cluster">
+        <div class="dropdown" data-menu><button class="btn btn-secondary" type="button" aria-haspopup="menu">Closed</button><div class="dropdown-menu" role="menu" hidden><button class="dropdown-item" type="button">Item</button></div></div>
+        <div class="dropdown" data-menu><button class="btn btn-secondary" type="button" aria-haspopup="menu" aria-expanded="true">End</button><div class="dropdown-menu dropdown-menu-end is-open" role="menu"><button class="dropdown-item" type="button">Edit</button><button class="dropdown-item" type="button">Archive</button></div></div>
+        <div class="dropdown" data-menu style="margin-top:calc(var(--radius)*10)"><button class="btn btn-secondary" type="button" aria-haspopup="menu" aria-expanded="true">Up</button><div class="dropdown-menu dropdown-menu-up is-open" role="menu"><button class="dropdown-item" type="button">Profile</button></div></div>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="demo-label">.menu (inline list)</div>
+      <div class="menu" role="menu">
+        <a class="menu-item" href="#" role="menuitem">Profile</a>
+        <button class="menu-item" type="button" role="menuitemradio" aria-checked="true">Active choice</button>
+        <button class="menu-item" type="button" role="menuitem" aria-disabled="true">Disabled</button>
+        <button class="menu-item is-danger" type="button" role="menuitem">Remove</button>
+      </div>
+    </div>
+    <div class="demo stack">
+      <div class="demo-label">.tabs / .tab</div>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true">Overview</button>
+        <button class="tab" role="tab" aria-selected="false">Orders</button>
+        <button class="tab" role="tab" aria-selected="false">Payments</button>
+        <button class="tab" role="tab" aria-selected="false" disabled>Disabled</button>
+      </div>
+      <div class="demo-label">.accordion / .disclosure</div>
+      <div class="accordion">
+        <details class="disclosure" open><summary>How do payments work?</summary><div>Parents pay by card; funds go to your organization.</div></details>
+        <details class="disclosure"><summary>When do prizes ship?</summary><div>After the fundraiser closes.</div></details>
+      </div>
+      <div class="demo-label">.disclosure-trigger / .disclosure-panel (button form)</div>
+      <div class="accordion">
+        <div class="disclosure"><button class="disclosure-trigger" type="button" aria-expanded="true">Button-driven item</button><div class="disclosure-panel">Panel text.</div></div>
+        <div class="disclosure"><button class="disclosure-trigger" type="button" aria-expanded="false">Collapsed item</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SURFACES ================= -->
+<section id="surfaces">
+  <h2>Card, badge, chip, avatar, divider</h2>
+  <div class="grid grid-3">
+    <div class="card stack-sm stack"><span class="card-title">.card</span><p class="text-muted text-sm">Resting card, <code>--elev-1</code>.</p></div>
+    <div class="card card-interactive stack-sm stack"><span class="card-title">.card-interactive</span><p class="text-muted text-sm">Hover for <code>--elev-2</code>.</p></div>
+    <div class="card card-hero stack-sm stack"><span class="card-title">.card-hero</span><p class="text-muted text-sm"><code>--shadow-hero</code>, once per screen.</p></div>
+  </div>
+  <h3>Badges</h3>
+  <div class="cluster"><span class="badge">Default</span><span class="badge badge-neutral">Neutral</span><span class="badge badge-success">Paid</span><span class="badge badge-warning">Pending</span><span class="badge badge-danger">Failed</span></div>
+  <h3>Chips</h3>
+  <div class="cluster"><button class="chip" type="button">Unselected</button><button class="chip" type="button" aria-pressed="true">Selected</button><button class="chip is-selected" type="button">.is-selected</button><button class="chip" type="button" disabled>Disabled</button></div>
+  <h3>Avatars</h3>
+  <div class="cluster"><span class="avatar avatar-sm">AM</span><span class="avatar">AM</span><span class="avatar avatar-lg">AM</span><span class="avatar"><img src="../../public/logo/w-logo.svg" alt=""></span></div>
+  <h3>Dividers</h3>
+  <div class="stack"><hr class="divider"><div class="cluster" style="height:3rem"><span>Left</span><div class="divider divider-vertical"></div><span>Right</span></div></div>
+</section>
+
+<!-- ================= OVERLAYS ================= -->
+<section id="overlays">
+  <h2>Overlays</h2>
+  <p class="text-muted text-sm">Each overlay is hidden with <code>hidden</code> and open with <code>.is-open</code>. The frames below show them open.</p>
+  <div class="grid grid-2" style="margin-top:calc(var(--radius)*2)">
+    <div>
+      <div class="demo-label">.backdrop + .modal (open)</div>
+      <div class="demo-frame">
+        <div class="backdrop is-open"></div>
+        <div class="modal is-open" role="dialog" aria-modal="true" aria-labelledby="m1">
+          <h3 id="m1" style="margin-top:0">Delete this fundraiser?</h3>
+          <p class="text-muted text-sm">This can't be undone.</p>
+          <div class="modal-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-danger">Delete</button></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="demo-label">.drawer (open, right side)</div>
+      <div class="demo-frame">
+        <div class="drawer is-open" role="dialog" aria-labelledby="d1">
+          <div class="stack">
+            <h3 id="d1" style="margin:0">Edit member</h3>
+            <div class="field"><label for="d2">Name</label><input id="d2" class="input" value="Alex Morgan"></div>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="demo-label">.toast (open) — default, .toast-success, .toast-danger</div>
+      <div class="demo-frame demo-frame-sm">
+        <div class="toast is-open" role="status"><div><div class="toast-title">Saved</div><div class="text-sm text-muted">Your changes are live.</div></div></div>
+      </div>
+      <div class="demo-frame demo-frame-sm" style="margin-top:calc(var(--radius)*1)"><div class="toast toast-success is-open" role="status"><span class="toast-title">Role switched</span></div></div>
+      <div class="demo-frame demo-frame-sm" style="margin-top:calc(var(--radius)*1)"><div class="toast toast-danger is-open" role="alert"><span class="toast-title">We couldn't switch your role. Try again.</span></div></div>
+    </div>
+    <div>
+      <div class="demo-label">.tooltip (open) and closed overlays</div>
+      <div class="demo" style="padding-top:calc(var(--radius)*8)">
+        <div class="cluster">
+          <span class="has-tooltip"><button class="btn btn-secondary btn-icon" aria-label="Help">?</button><span class="tooltip is-open" role="tooltip">Open tooltip</span></span>
+          <span class="has-tooltip"><button class="btn btn-secondary btn-icon" aria-label="Info">i</button><span class="tooltip" role="tooltip">Closed tooltip</span></span>
+        </div>
+        <p class="text-sm text-muted" style="margin-top:calc(var(--radius)*2)">A closed modal, drawer, toast and backdrop render nothing:</p>
+        <div class="backdrop" hidden></div><div class="modal" hidden></div><div class="drawer" hidden></div><div class="toast" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEEDBACK ================= -->
+<section id="feedback">
+  <h2>Feedback</h2>
+  <div class="stack">
+    <div class="alert alert-info" role="status"><div><div class="alert-title">Heads up</div>Info alert text.</div></div>
+    <div class="alert alert-success" role="status"><div><div class="alert-title">Payment received</div>Success alert text.</div></div>
+    <div class="alert alert-warning" role="status"><div><div class="alert-title">Maintenance window</div>Please don't enter data between 2:30 and 3pm.</div></div>
+    <div class="alert alert-danger" role="alert"><div><div class="alert-title">Payment failed</div>Danger alert text.</div></div>
+    <div class="alert"><div>Plain <code>.alert</code></div></div>
+  </div>
+  <div class="grid grid-2" style="margin-top:calc(var(--radius)*3)">
+    <div class="empty-state"><span class="empty-state-title">No fundraisers yet</span><p>Create your first fundraiser to start selling.</p><button class="btn btn-primary">Create fundraiser</button></div>
+    <div class="card stack">
+      <div class="demo-label">.skeleton and .spinner</div>
+      <span class="skeleton" style="width:50%"></span><span class="skeleton"></span><span class="skeleton" style="width:80%"></span>
+      <div class="cluster"><span class="spinner"></span><span class="text-muted text-sm">Loading…</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHELL ================= -->
+<section id="shell">
+  <h2>App shell</h2>
+  <p class="text-muted">The sidebar frame every screen sits in is in <a href="app-shell.html">app-shell.html</a>.</p>
+</section>
+
+<!-- ================= GUIDELINES ================= -->
+<section id="guidelines" class="guidelines">
+  <h2>UI guidelines</h2>
+
+  <h3>Navigation</h3>
+  <ol>
+    <li><strong>One left sidebar is the only main navigation, never a top nav</strong> — the dashboard layout is a sidebar plus an inset content area.</li>
+    <li><strong>Sidebar order is fixed: Dashboard, Members, Organizations, Fundraisers, Prizes, Payments, Permission Slips, Inventory, Messages, Payment Portal, Documentation, Permissions, Email Templates</strong> — this is the order of the app's navigation list, so designs must not reorder it.</li>
+    <li><strong>Show only the items a role may see; never grey out the rest</strong> — the app filters items by role. The shell lists all of them as a superset.
+      <ul>
+        <li>Admin and WFC Admin: Members, Permissions and Email Templates.</li>
+        <li>Organization and sales roles: Organizations.</li>
+        <li>Participant and Parent: Fundraisers, Payments and Permission Slips. Prizes is Participant-only and Inventory is Parent-only.</li>
+        <li>Messages is shown to every role except WFC Admin.</li>
+      </ul>
+    </li>
+    <li><strong>Payment Portal and Documentation open in a new tab and carry an external-link mark</strong> — they leave the dashboard.</li>
+    <li><strong>Below the main list, staff roles get a collapsible "Fundraisers" group: organization, then its fundraisers, newest first</strong> — Parents and Participants already have a Fundraisers item, so they don't get the group.</li>
+    <li><strong>The signed-in user lives in the sidebar footer: name, role label, and a menu with Switch Role (only when the user has several roles), Profile and Log out</strong> — role switching reloads the dashboard, so it belongs with the account, not in the page.</li>
+    <li><strong>On phones the sidebar collapses behind a menu button in the top bar; the header carries the logo and the button</strong> — the real app opens the sidebar as a sheet from a menu button.</li>
+    <li><strong>Mark the current section with <code>aria-current="page"</code> on its <code>data-nav-key</code> link</strong> — the shell styles that state with <code>--sidebar-accent</code> and <code>--sidebar-accent-foreground</code>.</li>
+    <li><strong>Screens before sign-in or outside the dashboard (sign up, accept invitation, payment, Stripe Connect onboarding) use a split layout with no sidebar: form on the left, brand image on the right, logo centered on top on phones</strong> — these flows are standalone pages in the app, not dashboard screens.</li>
+    <li><strong>A screen's title matches its nav label (for example "Fundraisers")</strong> — the app builds browser titles from these labels as <code>Title - App name</code>.</li>
+  </ol>
+
+  <h3>Layout and density</h3>
+  <ol>
+    <li><strong>Content is one column of <code>.card</code> blocks in the inset area, capped at the 2xl width and centered</strong> — the dashboard inset is limited to the 2xl screen width.</li>
+    <li><strong>Compose with <code>.stack</code> (vertical), <code>.cluster</code> (inline) and <code>.grid</code> with <code>.grid-2</code> / <code>.grid-3</code> / <code>.grid-4</code>; don't add custom spacing</strong> — the utilities use steps of <code>--radius</code>.</li>
+    <li><strong>Density is comfortable, not compact: <code>.btn</code> is 2.5rem tall, <code>.btn-sm</code> 2.25rem, <code>.btn-lg</code> 2.75rem; <code>.input</code> matches the default button</strong> — users are parents, volunteers and students on phones, so targets stay large.</li>
+    <li><strong>Use the three radius tiers as the classes do: cards are the roundest, controls medium, chips and menu items smallest</strong> — this mirrors the app's <code>card</code>, <code>control</code> and <code>chip</code> radii.</li>
+    <li><strong>Depth comes only from <code>--elev-1</code> (resting card), <code>--elev-2</code> (menus, hover, toast), <code>--elev-3</code> (modal, drawer) and <code>--shadow-hero</code> (<code>.card-hero</code>, one per screen at most)</strong> — the shadows are tinted with the brand brown, so they match the page.</li>
+    <li><strong>Lists of records are data tables on desktop and stacked <code>.card</code> rows on phones</strong> — the app is table-heavy and the shell must work at 375px.</li>
+  </ol>
+
+  <h3>Which class for which job</h3>
+  <table>
+    <thead><tr><th>Job</th><th>Use</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td>The one main action on a screen</td><td><code>.btn.btn-primary</code></td><td>the primary brown is the brand action color</td></tr>
+      <tr><td>Secondary action, cancel, back</td><td><code>.btn-secondary</code></td><td>white with a border sits calmly next to primary</td></tr>
+      <tr><td>Tertiary and toolbar actions</td><td><code>.btn-ghost</code>, and <code>.btn-icon</code> for icon-only</td><td>keeps toolbars light</td></tr>
+      <tr><td>Delete, remove, revoke</td><td><code>.btn-danger</code>, always behind a <code>.modal</code> confirm</td><td>destructive actions are confirmed in a dialog</td></tr>
+      <tr><td>Form rows</td><td><code>.field</code> with <code>.input</code>, <code>.textarea</code>, <code>.select</code>; errors via <code>.is-invalid</code> plus <code>.field-error</code></td><td>label, hint and error stay attached to the control</td></tr>
+      <tr><td>Yes/no choice that applies immediately</td><td><code>.switch</code></td><td>a switch takes effect now; a <code>.checkbox</code> waits for submit</td></tr>
+      <tr><td>Pick one of a few</td><td><code>.radio</code> in a <code>.stack-sm</code>; many options use <code>.select</code></td><td>short lists stay visible</td></tr>
+      <tr><td>Row actions, account menu, role switch</td><td><code>.dropdown</code> with <code>.dropdown-item</code>; mark the active choice <code>aria-checked="true"</code></td><td>the app uses dropdown menus with a checkmark for the active role</td></tr>
+      <tr><td>Switch between views of the same record</td><td><code>.tabs</code> / <code>.tab</code></td><td>tabs change the view, not the page</td></tr>
+      <tr><td>FAQ, help and long optional detail</td><td><code>.accordion</code> with <code>.disclosure</code></td><td>help content stays collapsed until needed</td></tr>
+      <tr><td>Grouped content</td><td><code>.card</code>; whole card clickable uses <code>.card-interactive</code></td><td>cards are the app's one container</td></tr>
+      <tr><td>Status of an order, payment or fundraiser</td><td><code>.badge</code> neutral/success/warning/danger</td><td>one color per state across the app</td></tr>
+      <tr><td>Filters and tags</td><td><code>.chip</code> (<code>aria-pressed="true"</code> when on)</td><td>chips are toggles, badges are read-only</td></tr>
+      <tr><td>People and organizations</td><td><code>.avatar</code>, plus an initial when there is no photo</td><td>initials fill the same slot as a photo</td></tr>
+      <tr><td>Edit a record without leaving the list</td><td><code>.drawer</code> (right side)</td><td>the list stays visible behind it</td></tr>
+      <tr><td>Confirm, terms and conditions</td><td><code>.modal</code> with <code>.backdrop</code></td><td>the app gates these in a dialog</td></tr>
+      <tr><td>Result of an action</td><td><code>.toast</code> (top center, <code>.toast-success</code> / <code>.toast-danger</code>)</td><td>the app's toaster is top-center</td></tr>
+      <tr><td>Page-level notice (maintenance, staging)</td><td><code>.alert</code>, info or warning, above the content</td><td>notices sit above the shell content</td></tr>
+      <tr><td>Nothing here yet</td><td><code>.empty-state</code> with one primary <code>.btn</code></td><td>an empty state always offers the next step</td></tr>
+      <tr><td>Loading</td><td><code>.skeleton</code> for blocks and tables, <code>.spinner</code> inside a button</td><td>the sidebar already loads with skeletons</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Theme</h3>
+  <ol>
+    <li><strong>The theme is light and warm: page <code>--background</code> (cream), text and primary <code>--primary</code> (brown), cards <code>--card</code> (white)</strong> — the app only ships this look.</li>
+    <li><strong>Don't build a dark mode</strong> — the <code>.dark</code> token set is defined but the app never switches it on.</li>
+    <li><strong>The brown palette steps and bright pastels in the Tailwind config (<code>brown-*</code>, <code>pink-*</code>, <code>yellow-*</code>, <code>orange-*</code>, <code>blue-*</code>, <code>creamy-50</code>) are for illustration and role tints, not UI chrome</strong> — chrome uses the semantic tokens.</li>
+    <li><strong>Use <code>--chart-1</code> to <code>--chart-5</code> for data series only, in order</strong> — they aren't status colors.</li>
+    <li><strong>Status colors are <code>--success</code>, <code>--warning</code>, <code>--destructive</code>, each with its <code>-foreground</code>; never use red or green for decoration</strong> — color then always means state.</li>
+    <li><strong>Use the script face (<code>.font-script</code>, Mr Dafoe) only for brand moments, never for body text, labels or data</strong> — body uses Rethink Sans.</li>
+    <li><strong>The sidebar header shows the wide WFC logo in a white, bordered, rounded box, and the small mark when the sidebar is collapsed; the W mark (<code>w-logo.svg</code>) is for compact brand spots</strong> — the app swaps the two by sidebar state.</li>
+  </ol>
+
+  <h3>Voice and tone</h3>
+  <ol>
+    <li><strong>Warm and plain, with the sweetness light: "Fundraisers", "Organizations", "Members"</strong> — the product calls its campaigns "fundraisers" in the UI.</li>
+    <li><strong>Say "Fundraiser", not "campaign", in any user-facing text</strong> — the routes say campaign, but the labels, page titles and empty states say fundraiser.</li>
+    <li><strong>Buttons are a verb and an object in Title Case for nav, sentence case for actions ("Save changes")</strong> — nav labels in the app are Title Case.</li>
+    <li><strong>Errors say what to do next, in one sentence, without blame ("Failed to switch role" becomes "We couldn't switch your role. Try again.")</strong> — users are volunteers, not admins.</li>
+    <li><strong>Name roles exactly as the app does: Admin, WFC Admin, Sales Manager, Fundraising Consultant, Organization Admin, Organization Staff, Participant, Parent</strong> — these are the role labels shown in the account menu.</li>
+    <li><strong>Money and progress are specific and positive ("$120 raised of $500")</strong> — fundraising progress is the thing users come to see.</li>
+  </ol>
+</section>
+
+</div>
+</body>
+</html>
