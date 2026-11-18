@@ -1,0 +1,6 @@
+setup_command: yarn install --frozen-lockfile
+commands:
+  test: yarn test
+  build: yarn build
+package_install_commands:
+  yarn: yarn add {name}@{version}
