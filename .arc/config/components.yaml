@@ -1,0 +1,9 @@
+version: 1
+components:
+  comp_wfc:
+    name: WFC
+    kind: web_ui
+    directory: .
+  comp_relational_database:
+    name: Relational Database
+    kind: managed_service
