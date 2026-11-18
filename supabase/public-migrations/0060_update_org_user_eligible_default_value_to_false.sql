@@ -1,0 +1,1 @@
+ALTER TABLE "organizations_users" ALTER COLUMN "eligible" SET DEFAULT false;

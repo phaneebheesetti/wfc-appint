@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ALTER COLUMN "profit_share_percentage" SET DATA TYPE numeric(5, 2);

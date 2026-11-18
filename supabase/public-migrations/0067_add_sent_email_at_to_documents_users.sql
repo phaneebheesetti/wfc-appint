@@ -1,0 +1,1 @@
+ALTER TABLE "documents_users" ADD COLUMN "sent_email_at" timestamp;

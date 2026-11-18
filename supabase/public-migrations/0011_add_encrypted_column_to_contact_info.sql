@@ -1,0 +1,1 @@
+ALTER TABLE "contact_infos" ADD COLUMN "encrypted" boolean DEFAULT false;

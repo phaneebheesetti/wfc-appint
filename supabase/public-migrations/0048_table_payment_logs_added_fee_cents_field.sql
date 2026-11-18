@@ -1,0 +1,1 @@
+ALTER TABLE "payment_logs" ADD COLUMN "fee_cents" integer DEFAULT 0 NOT NULL;

@@ -1,0 +1,958 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1739814034115,
+      "tag": "0000_initial_setup",
+      "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739816554224,
+      "tag": "0001_add_initial_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739883440173,
+      "tag": "0002_update-clerk-id-unique",
+      "breakpoints": false
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1739926914216,
+      "tag": "0003_add_permissions",
+      "breakpoints": false
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1739926922292,
+      "tag": "0004_add_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1739980863510,
+      "tag": "0005_add_permission_all",
+      "breakpoints": false
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1739982030811,
+      "tag": "0006_add_all_policies",
+      "breakpoints": false
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1740059648343,
+      "tag": "0007_add_participants",
+      "breakpoints": false
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1740072522041,
+      "tag": "0008_add_encryption_key_secret_id_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1740072532368,
+      "tag": "0009_add_organization_triggers",
+      "breakpoints": false
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1740074856365,
+      "tag": "0010_add_encrypt_decrypt_functions",
+      "breakpoints": false
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1740075616389,
+      "tag": "0011_add_encrypted_column_to_contact_info",
+      "breakpoints": false
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1740076600740,
+      "tag": "0012_add_contact_infos_trigger",
+      "breakpoints": false
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1740402427715,
+      "tag": "0013_add_read_secrets_function",
+      "breakpoints": false
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1740413655801,
+      "tag": "0014_add_organization_id_to_user",
+      "breakpoints": false
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1740607262669,
+      "tag": "0015_changed_schema_from_contacts_info",
+      "breakpoints": false
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1740668132064,
+      "tag": "0016_changed_schema_from_campaign",
+      "breakpoints": false
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1740746572812,
+      "tag": "0017_add_default_country_code_and_new_roles",
+      "breakpoints": false
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1740771027127,
+      "tag": "0018_remove_email_check",
+      "breakpoints": false
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1741015228452,
+      "tag": "0019_add_campaigns_participants_permissions",
+      "breakpoints": false
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1741015246463,
+      "tag": "0020_add_campaigns_participants",
+      "breakpoints": false
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1741035610377,
+      "tag": "0021_add_user_statuses",
+      "breakpoints": false
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1741102546591,
+      "tag": "0022_add_campaigns_statuses",
+      "breakpoints": false
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1741111350371,
+      "tag": "0023_table_organizations_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1741195221052,
+      "tag": "0024_add_sales_manager_role",
+      "breakpoints": false
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1741205092085,
+      "tag": "0025_added_roles_to_users_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1741389902926,
+      "tag": "0026_add_cases_transactions",
+      "breakpoints": false
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1741619495534,
+      "tag": "0027_add_campaigns_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1741713589233,
+      "tag": "0028_drop_table_participants",
+      "breakpoints": false
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1741714105107,
+      "tag": "0029_add_unique_indexes_to_pivot_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1741729595422,
+      "tag": "0030_added_payment_logs_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1741802197036,
+      "tag": "0031_add_grade_teacher_to_contact_info",
+      "breakpoints": false
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1742425197096,
+      "tag": "0032_cases_transactions_added_price_per_bar",
+      "breakpoints": false
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1742426993628,
+      "tag": "0033_cases_transactions_added_bars_per_case",
+      "breakpoints": false
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1742642709677,
+      "tag": "0034_add_prizes_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1742821284241,
+      "tag": "0035_add_events_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1743002481955,
+      "tag": "0036_add_prizes_events_buckets",
+      "breakpoints": false
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1743002886058,
+      "tag": "0037_update_prizes_and_events",
+      "breakpoints": false
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1743025665812,
+      "tag": "0038_prizes_table_updated_goal_type",
+      "breakpoints": false
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1743026119153,
+      "tag": "0039_updated_goals_for_table_events",
+      "breakpoints": false
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1743109043976,
+      "tag": "0040_add_stripe_connect_account_id_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1743197933197,
+      "tag": "0041_updated_payment_related_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1743435802705,
+      "tag": "0042_removed_pin_from_campaign_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1743528123219,
+      "tag": "0043_campaign_table_added_digital_payment",
+      "breakpoints": false
+    },
+    {
+      "idx": 44,
+      "version": "7",
+      "when": 1743531372226,
+      "tag": "0044_add_created_by_user_id_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 45,
+      "version": "7",
+      "when": 1744383337870,
+      "tag": "0045_campaign_table_cases_goal_free",
+      "breakpoints": false
+    },
+    {
+      "idx": 46,
+      "version": "7",
+      "when": 1745499732661,
+      "tag": "0046_added_foreign_keys",
+      "breakpoints": false
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1745504346289,
+      "tag": "0047_added_other_indexes",
+      "breakpoints": false
+    },
+    {
+      "idx": 48,
+      "version": "7",
+      "when": 1745602298893,
+      "tag": "0048_table_payment_logs_added_fee_cents_field",
+      "breakpoints": false
+    },
+    {
+      "idx": 49,
+      "version": "7",
+      "when": 1746453866285,
+      "tag": "0049_summary_buckets",
+      "breakpoints": false
+    },
+    {
+      "idx": 50,
+      "version": "7",
+      "when": 1746723075424,
+      "tag": "0050_add_parent_role",
+      "breakpoints": false
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1746726347842,
+      "tag": "0051_add_parent_and_invitedby_columns_to_user_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 52,
+      "version": "7",
+      "when": 1746727082033,
+      "tag": "0052_add_user_parent_relationships",
+      "breakpoints": false
+    },
+    {
+      "idx": 53,
+      "version": "7",
+      "when": 1747055695210,
+      "tag": "0053_add_unique_constraints_to_email_phone_on_contact_info",
+      "breakpoints": false
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1747156695076,
+      "tag": "0054_update_profit_share_percentage_to_numeric",
+      "breakpoints": false
+    },
+    {
+      "idx": 55,
+      "version": "7",
+      "when": 1747348490230,
+      "tag": "0055_add_encryptionKeySecretId_to_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 56,
+      "version": "7",
+      "when": 1747394245153,
+      "tag": "0056_add_read_secret_function",
+      "breakpoints": false
+    },
+    {
+      "idx": 57,
+      "version": "7",
+      "when": 1747685489943,
+      "tag": "0057_add_documents_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 58,
+      "version": "7",
+      "when": 1747686305051,
+      "tag": "0058_add_documents_bucket",
+      "breakpoints": false
+    },
+    {
+      "idx": 59,
+      "version": "7",
+      "when": 1747844388774,
+      "tag": "0059_add_document_type",
+      "breakpoints": false
+    },
+    {
+      "idx": 60,
+      "version": "7",
+      "when": 1748006689075,
+      "tag": "0060_update_org_user_eligible_default_value_to_false",
+      "breakpoints": false
+    },
+    {
+      "idx": 61,
+      "version": "7",
+      "when": 1748032200798,
+      "tag": "0061_add_metadata_to_document_user",
+      "breakpoints": false
+    },
+    {
+      "idx": 62,
+      "version": "7",
+      "when": 1748458663357,
+      "tag": "0062_add_chat_feature_tables_and_policies",
+      "breakpoints": false
+    },
+    {
+      "idx": 63,
+      "version": "7",
+      "when": 1748540907407,
+      "tag": "0063_add_announcements_table_and_policies",
+      "breakpoints": false
+    },
+    {
+      "idx": 64,
+      "version": "7",
+      "when": 1750621672158,
+      "tag": "0064_add_status_to_payment_logs",
+      "breakpoints": false
+    },
+    {
+      "idx": 65,
+      "version": "7",
+      "when": 1750958959246,
+      "tag": "0065_add_profit_fields_to_cases_transactions",
+      "breakpoints": false
+    },
+    {
+      "idx": 66,
+      "version": "7",
+      "when": 1753883595501,
+      "tag": "0066_add_clerk_invitation_url",
+      "breakpoints": false
+    },
+    {
+      "idx": 67,
+      "version": "7",
+      "when": 1754673731486,
+      "tag": "0067_add_sent_email_at_to_documents_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 68,
+      "version": "7",
+      "when": 1755472115325,
+      "tag": "0068_add_clerk_invitation_sent_at_to_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 69,
+      "version": "7",
+      "when": 1755609391028,
+      "tag": "0069_update_contact_info_trigger",
+      "breakpoints": false
+    },
+    {
+      "idx": 70,
+      "version": "7",
+      "when": 1756299805806,
+      "tag": "0070_add_eligible_updated_at_to_org_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 71,
+      "version": "7",
+      "when": 1756765870015,
+      "tag": "0071_add_deleted_at_to_users_payments_campaigns_and_orgs",
+      "breakpoints": false
+    },
+    {
+      "idx": 72,
+      "version": "7",
+      "when": 1757447446271,
+      "tag": "0072_add_permission_slip_signed_at_to_campaigns_users_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 73,
+      "version": "7",
+      "when": 1757528436979,
+      "tag": "0073_add_digital_permission_slip_field_to_campaigns",
+      "breakpoints": false
+    },
+    {
+      "idx": 74,
+      "version": "7",
+      "when": 1759338707400,
+      "tag": "0074_update_event_date_optional",
+      "breakpoints": false
+    },
+    {
+      "idx": 75,
+      "version": "7",
+      "when": 1759873876648,
+      "tag": "0075_update_campaign_cases_goal_optional",
+      "breakpoints": false
+    },
+    {
+      "idx": 76,
+      "version": "7",
+      "when": 1759944302266,
+      "tag": "0076_add_previous_next_prizes_to_prizes_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 77,
+      "version": "7",
+      "when": 1760805789944,
+      "tag": "0077_add_contact_fields_to_users_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 78,
+      "version": "7",
+      "when": 1760909302644,
+      "tag": "0078_add_contact_fields_to_organizations_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 79,
+      "version": "7",
+      "when": 1761141551837,
+      "tag": "0079_add_admin_user_to_organizations_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 80,
+      "version": "7",
+      "when": 1761327025898,
+      "tag": "0080_add_indexes_to_users_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 81,
+      "version": "7",
+      "when": 1761327225574,
+      "tag": "0081_add_indexes_to_organizations_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 82,
+      "version": "7",
+      "when": 1761328239357,
+      "tag": "0082_add_indexes_to_campaigns_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 83,
+      "version": "7",
+      "when": 1761339846520,
+      "tag": "0083_add_indexes_to_multiple_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 84,
+      "version": "7",
+      "when": 1761602823704,
+      "tag": "0084_update_authorize_function",
+      "breakpoints": false
+    },
+    {
+      "idx": 85,
+      "version": "7",
+      "when": 1761605267368,
+      "tag": "0085_update_authorize",
+      "breakpoints": false
+    },
+    {
+      "idx": 86,
+      "version": "7",
+      "when": 1764165782418,
+      "tag": "0086_add_unique_index_to_channels_name",
+      "breakpoints": false
+    },
+    {
+      "idx": 87,
+      "version": "7",
+      "when": 1764166199996,
+      "tag": "0087_add_channels_trigger",
+      "breakpoints": false
+    },
+    {
+      "idx": 88,
+      "version": "7",
+      "when": 1764178473152,
+      "tag": "0088_remove_unique_index_from_channels_name",
+      "breakpoints": false
+    },
+    {
+      "idx": 89,
+      "version": "7",
+      "when": 1764178496115,
+      "tag": "0089_update_channels_trigger",
+      "breakpoints": false
+    },
+    {
+      "idx": 90,
+      "version": "7",
+      "when": 1765399277942,
+      "tag": "0090_add_deleted_user_status",
+      "breakpoints": false
+    },
+    {
+      "idx": 91,
+      "version": "7",
+      "when": 1765988898692,
+      "tag": "0091_add_get_decrypted_secret_function_wrapper",
+      "breakpoints": false
+    },
+    {
+      "idx": 92,
+      "version": "7",
+      "when": 1766083717170,
+      "tag": "0092_add_parent_id_to_cases_transactions",
+      "breakpoints": false
+    },
+    {
+      "idx": 93,
+      "version": "7",
+      "when": 1767192440996,
+      "tag": "0093_add_requested_case_transaction_at_to_campaigns_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 94,
+      "version": "7",
+      "when": 1767815100362,
+      "tag": "0094_add_home_run_prize_template_to_campaigns",
+      "breakpoints": false
+    },
+    {
+      "idx": 95,
+      "version": "7",
+      "when": 1767992466610,
+      "tag": "0095_add_organization_id_to_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 96,
+      "version": "7",
+      "when": 1768143523110,
+      "tag": "0096_backfill_organization_id",
+      "breakpoints": false
+    },
+    {
+      "idx": 97,
+      "version": "7",
+      "when": 1768144367497,
+      "tag": "0097_add_not_null_organization_id_to_tables",
+      "breakpoints": false
+    },
+    {
+      "idx": 98,
+      "version": "7",
+      "when": 1770648083298,
+      "tag": "0098_lowercase_users_email",
+      "breakpoints": false
+    },
+    {
+      "idx": 99,
+      "version": "7",
+      "when": 1773753259749,
+      "tag": "0099_add_birth_date_to_user",
+      "breakpoints": false
+    },
+    {
+      "idx": 100,
+      "version": "7",
+      "when": 1773832192621,
+      "tag": "0100_remove_birth_date_from_user",
+      "breakpoints": false
+    },
+    {
+      "idx": 101,
+      "version": "7",
+      "when": 1775121760005,
+      "tag": "0101_add_fundraising_consultant_user_id_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 102,
+      "version": "7",
+      "when": 1776095517917,
+      "tag": "0102_add_email_verification_fields_to_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 103,
+      "version": "7",
+      "when": 1776263755793,
+      "tag": "0103_add_participant_parent_mapping_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 104,
+      "version": "7",
+      "when": 1776752711246,
+      "tag": "0104_remove_is_primary_from_participant_parent_mapping_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 105,
+      "version": "7",
+      "when": 1778138418388,
+      "tag": "0105_add_clerk_external_id_to_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 106,
+      "version": "7",
+      "when": 1778653137137,
+      "tag": "0106_multi_role_users_constraints",
+      "breakpoints": false
+    },
+    {
+      "idx": 107,
+      "version": "7",
+      "when": 1779170325879,
+      "tag": "0107_role_switch_history",
+      "breakpoints": false
+    },
+    {
+      "idx": 108,
+      "version": "7",
+      "when": 1780837940666,
+      "tag": "0108_add_sf_account_id_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 109,
+      "version": "7",
+      "when": 1780899123372,
+      "tag": "0109_add_visibility_for_org_campaigns_on_onboarding_progress",
+      "breakpoints": false
+    },
+    {
+      "idx": 110,
+      "version": "7",
+      "when": 1781589513450,
+      "tag": "0110_add_videos_bucket",
+      "breakpoints": false
+    },
+    {
+      "idx": 111,
+      "version": "7",
+      "when": 1782120534597,
+      "tag": "0111_add_campaigns_progress_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 112,
+      "version": "7",
+      "when": 1782399560834,
+      "tag": "0112_add_participant_names_access_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 113,
+      "version": "7",
+      "when": 1783945344400,
+      "tag": "0113_add_terms_and_conditions",
+      "breakpoints": false
+    },
+    {
+      "idx": 114,
+      "version": "7",
+      "when": 1784025910232,
+      "tag": "0114_add_participant_names_access_logs_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 115,
+      "version": "7",
+      "when": 1784107055464,
+      "tag": "0115_add_other_terms_fields",
+      "breakpoints": false
+    },
+    {
+      "idx": 116,
+      "version": "7",
+      "when": 1784292712863,
+      "tag": "0116_add_sf_order_columns",
+      "breakpoints": false
+    },
+    {
+      "idx": 117,
+      "version": "7",
+      "when": 1784894217497,
+      "tag": "0117_add_digital_sales_information_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 118,
+      "version": "7",
+      "when": 1785604656597,
+      "tag": "0118_add_account_number_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 119,
+      "version": "7",
+      "when": 1785741065723,
+      "tag": "0119_add_bulk_uploads_bucket",
+      "breakpoints": false
+    },
+    {
+      "idx": 120,
+      "version": "7",
+      "when": 1786084788076,
+      "tag": "0120_add_isBulkUpload_column_organizations_and_users_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 121,
+      "version": "7",
+      "when": 1786544389058,
+      "tag": "0121_add_consumers_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 122,
+      "version": "7",
+      "when": 1786546450558,
+      "tag": "0122_add_consumer_payment_logs_table",
+      "breakpoints": false
+    },
+    {
+      "idx": 123,
+      "version": "7",
+      "when": 1786986839517,
+      "tag": "0123_organization-sync-changes",
+      "breakpoints": false
+    },
+    {
+      "idx": 124,
+      "version": "7",
+      "when": 1786986865913,
+      "tag": "0124_add_nightly_job_logs_bucket",
+      "breakpoints": false
+    },
+    {
+      "idx": 125,
+      "version": "7",
+      "when": 1787128253962,
+      "tag": "0125_add_consumer_id_column_to_payment_logs",
+      "breakpoints": false
+    },
+    {
+      "idx": 126,
+      "version": "7",
+      "when": 1787128428972,
+      "tag": "0126_add_enums_to_consumer_payment_status",
+      "breakpoints": false
+    },
+    {
+      "idx": 127,
+      "version": "7",
+      "when": 1787909715365,
+      "tag": "0127_widen_pin_alphabet",
+      "breakpoints": false
+    },
+    {
+      "idx": 128,
+      "version": "7",
+      "when": 1787934596872,
+      "tag": "0128_add_contact_email_to_organizations",
+      "breakpoints": false
+    },
+    {
+      "idx": 129,
+      "version": "7",
+      "when": 1788262593890,
+      "tag": "0129_add_delivered_at_to_consumer_payment_logs",
+      "breakpoints": false
+    },
+    {
+      "idx": 130,
+      "version": "7",
+      "when": 1788337415847,
+      "tag": "0130_add_recipients_to_nightly_jobs",
+      "breakpoints": false
+    },
+    {
+      "idx": 131,
+      "version": "7",
+      "when": 1789974726863,
+      "tag": "0131_sync_channel_name_on_user_update",
+      "breakpoints": false
+    },
+    {
+      "idx": 132,
+      "version": "7",
+      "when": 1790844267400,
+      "tag": "0132_AddPrizeTemplateNameColumnToPrizesAndCampaignsTable",
+      "breakpoints": false
+    },
+    {
+      "idx": 133,
+      "version": "7",
+      "when": 1791865318645,
+      "tag": "0133_add_schedule_to_nightly_jobs",
+      "breakpoints": false
+    },
+    {
+      "idx": 134,
+      "version": "7",
+      "when": 1792547840308,
+      "tag": "0134_add_lastInviteSentAt_to_users",
+      "breakpoints": false
+    },
+    {
+      "idx": 135,
+      "version": "7",
+      "when": 1793645955132,
+      "tag": "0135_add_inventory_adjustment_fields",
+      "breakpoints": false
+    }
+  ]
+}

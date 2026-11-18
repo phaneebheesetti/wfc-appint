@@ -1,0 +1,10 @@
+/node_modules
+.next/
+
+# Exclude development files and folders
+*.md
+.env.example
+.git/
+.github/
+.vscode/
+.husky/

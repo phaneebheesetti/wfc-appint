@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ALTER COLUMN "cases_goal" SET DEFAULT 0;

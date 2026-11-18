@@ -1,0 +1,1 @@
+ALTER TABLE "contact_infos" DROP CONSTRAINT "check_email_format";

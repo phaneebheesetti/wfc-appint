@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX "campaigns_users_campaign_id_user_id_index" ON "campaigns_users" USING btree ("campaign_id","user_id");
+CREATE UNIQUE INDEX "organizations_users_organization_id_user_id_index" ON "organizations_users" USING btree ("organization_id","user_id");

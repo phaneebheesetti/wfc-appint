@@ -1,0 +1,47 @@
+---
+description: Backend-specific rules and best practices for API development
+globs: src/app/api/**/*.ts,src/app/api/**/*.tsx,src/server/**/*.ts
+alwaysApply: false
+---
+
+# Backend Conventions
+
+## API Design & Communication
+
+- Use RESTful conventions for API endpoints
+- Use consistent API response formats across all endpoints
+- **Success responses:** required `data` (use `null` when there is no payload), optional `message` for user-facing success text (e.g. toasts)
+- **Failure responses:** required `error` (human-readable message). Rely on HTTP status codes as the primary success/failure signal
+- Implement proper HTTP status codes (200, 201, 400, 401, 403, 404, 500)
+
+```typescript
+// Success with payload: return NextResponse.json({ data: result, message: "Optional success message" });
+// Success without payload: return NextResponse.json({ data: null, message: "Resource created" });
+// Failure: return NextResponse.json({ error: "Human-readable message" }, { status: 400 });
+```
+
+## Request/Response Handling
+
+- Always validate input data before processing
+- Implement proper error boundaries and exception handling
+- Return appropriate HTTP status codes based on operation results
+- Handle async operations properly
+- Use proper request/response types
+
+## Database Operations
+
+- Use transactions for operations that modify multiple records
+- Use proper indexing for frequently queried columns
+- Implement proper foreign key relationships
+- Use proper connection pooling
+- Implement soft deletes when appropriate
+- Optimize queries to avoid N+1 problems
+- Use proper data types and constraints
+
+## Error Handling
+
+- Implement comprehensive error handling strategies
+- Handle different error types appropriately (validation, auth, database, external API)
+- Use meaningful error messages for client consumption
+- Implement proper error monitoring and alerting
+- **App Router API routes:** wrap route handlers with `withSentry` from `@/utils/api` so errors are captured by Sentry by default; avoid adding try/catch and `Sentry.captureException` in each route individually

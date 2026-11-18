@@ -1,0 +1,12 @@
+ALTER TABLE "campaign_announcements" ADD COLUMN "organization_id" uuid;
+ALTER TABLE "campaigns_users" ADD COLUMN "organization_id" uuid;
+ALTER TABLE "events" ADD COLUMN "organization_id" uuid;
+ALTER TABLE "prizes" ADD COLUMN "organization_id" uuid;
+ALTER TABLE "campaign_announcements" ADD CONSTRAINT "campaign_announcements_organization_id_organizations_id_fk" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "campaigns_users" ADD CONSTRAINT "campaigns_users_organization_id_organizations_id_fk" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "events" ADD CONSTRAINT "events_organization_id_organizations_id_fk" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "prizes" ADD CONSTRAINT "prizes_organization_id_organizations_id_fk" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
+CREATE INDEX "idx_campaign_announcements_organization_id" ON "campaign_announcements" USING btree ("organization_id");
+CREATE INDEX "idx_campaigns_users_organization_id" ON "campaigns_users" USING btree ("organization_id");
+CREATE INDEX "idx_events_organization_id" ON "events" USING btree ("organization_id");
+CREATE INDEX "idx_prizes_organization_id" ON "prizes" USING btree ("organization_id");

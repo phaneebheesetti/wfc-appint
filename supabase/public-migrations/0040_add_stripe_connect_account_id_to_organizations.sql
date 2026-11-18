@@ -1,0 +1,1 @@
+ALTER TABLE "organizations" ADD COLUMN "stripe_connected_account_id" varchar;

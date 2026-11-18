@@ -1,0 +1,1 @@
+ALTER TABLE "cases_transactions" ADD COLUMN "price_per_bar_cents" integer;

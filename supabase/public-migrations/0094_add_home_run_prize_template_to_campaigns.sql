@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ADD COLUMN "home_run_prizes_template" boolean DEFAULT false NOT NULL;

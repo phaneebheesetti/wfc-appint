@@ -1,0 +1,54 @@
+---
+description: General coding rules and conventions for the project
+alwaysApply: true
+---
+
+# General Conventions
+
+## Language & Type Safety
+
+- Always use TypeScript for all code files
+- Prefer explicit types over `any` - use `unknown` when type is truly unknown
+
+```typescript
+// Prefer: (value: unknown) => ...
+// Avoid: (value: any) => ...
+```
+
+## Files & Folders
+
+- Use kebab-case for all folders and files (e.g., `user-profile.tsx`, `payment-logs/`)
+- Keep files small and focused on single responsibility
+- Use barrel exports (`index.ts`) for clean imports; avoid deep barrel re-exports that pull in large trees (risk of cycles and slower resolution)
+
+## Variables & Functions
+
+- Use camelCase for variables, functions, and object properties
+- Use UPPER_SNAKE_CASE for constants and enums
+- Use descriptive names that clearly indicate purpose
+
+## Imports and Exports
+
+- Group imports in this order: external libraries, internal modules, relative imports
+- Use absolute imports with `@/` prefix for project code under `src/` (the configured path)
+- Sort imports alphabetically within each group
+- Use named imports over default imports when possible
+- Remove unused imports
+
+```typescript
+import { z } from "zod"
+
+import { apiClient } from "@/lib/api-client"
+
+import { LocalHelper } from "./local-helper"
+```
+
+## Environment & Configuration
+
+- Use environment variables for all configuration and sensitive values
+- Never commit sensitive data to version control
+
+## Code Comments & Documentation
+
+- Write self-documenting code with clear variable and function names
+- Add comments only for non-obvious business logic, workarounds, or non-obvious "why" (not "what")

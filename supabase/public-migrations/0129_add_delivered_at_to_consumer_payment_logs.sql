@@ -1,0 +1,1 @@
+ALTER TABLE "consumer_payment_logs" ADD COLUMN IF NOT EXISTS "delivered_at" timestamp with time zone;

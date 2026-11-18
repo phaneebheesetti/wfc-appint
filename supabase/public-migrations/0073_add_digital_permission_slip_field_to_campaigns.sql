@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ADD COLUMN "digital_permission_slip" boolean DEFAULT false NOT NULL;

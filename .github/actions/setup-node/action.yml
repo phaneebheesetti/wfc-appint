@@ -1,0 +1,37 @@
+name: Setup Node
+description: Setup Node.js with yarn cache, cache node_modules, and install dependencies. Caller must checkout first.
+
+inputs:
+  node-version:
+    description: Node.js version to use
+    required: false
+    default: "22.14.0"
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "yarn"
+        cache-dependency-path: yarn.lock
+
+    - name: Restore node_modules cache
+      id: node-modules-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ inputs.node-version }}-node-modules-${{ hashFiles('yarn.lock') }}
+
+    - name: Install dependencies
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: yarn install --frozen-lockfile --prefer-offline --no-progress
+
+    - name: Save node_modules cache
+      if: always() && steps.node-modules-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: node_modules
+        key: ${{ steps.node-modules-cache.outputs.cache-primary-key }}

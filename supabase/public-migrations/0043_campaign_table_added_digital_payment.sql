@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ADD COLUMN "digital_payment" boolean DEFAULT false NOT NULL;

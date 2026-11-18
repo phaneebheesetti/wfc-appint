@@ -1,0 +1,15 @@
+CREATE INDEX "idx_campaigns_created_at" ON "campaigns" USING btree ("created_at");
+CREATE INDEX "idx_campaigns_org_created_at" ON "campaigns" USING btree ("organization_id","created_at");
+CREATE INDEX "idx_cases_transactions_campaign_user_type" ON "cases_transactions" USING btree ("campaign_id","user_id","type");
+CREATE INDEX "idx_cases_transactions_created_at" ON "cases_transactions" USING btree ("created_at");
+CREATE INDEX "idx_cases_transactions_campaign_created_at" ON "cases_transactions" USING btree ("campaign_id","created_at");
+CREATE INDEX "idx_cases_transactions_user_campaign_created_at" ON "cases_transactions" USING btree ("user_id","campaign_id","created_at");
+CREATE INDEX "idx_contact_infos_email" ON "contact_infos" USING btree ("email");
+CREATE INDEX "idx_organizations_users_created_at" ON "organizations_users" USING btree ("created_at");
+CREATE INDEX "idx_organizations_created_at" ON "organizations" USING btree ("created_at");
+CREATE INDEX "idx_organizations_creator_created_at" ON "organizations" USING btree ("created_by_user_id","created_at");
+CREATE INDEX "idx_users_role" ON "users" USING btree ("role");
+CREATE INDEX "idx_payment_logs_campaign_created_at" ON "payment_logs" USING btree ("campaign_id","created_at");
+CREATE INDEX "idx_payment_logs_user_campaign_created_at" ON "payment_logs" USING btree ("user_id","campaign_id","created_at");
+CREATE INDEX "idx_prizes_campaign_name" ON "prizes" USING btree ("campaign_id","name");
+CREATE INDEX "idx_events_campaign_created_at" ON "events" USING btree ("campaign_id","created_at");

@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns" ADD COLUMN "cases_goal_free" integer DEFAULT 0 NOT NULL;

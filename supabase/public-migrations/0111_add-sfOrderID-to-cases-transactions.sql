@@ -1,0 +1,1 @@
+ALTER TABLE "cases_transactions" ADD COLUMN "sf_order_id" varchar;

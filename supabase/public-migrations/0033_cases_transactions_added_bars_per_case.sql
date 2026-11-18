@@ -1,0 +1,1 @@
+ALTER TABLE "cases_transactions" ADD COLUMN "bars_per_case" integer;

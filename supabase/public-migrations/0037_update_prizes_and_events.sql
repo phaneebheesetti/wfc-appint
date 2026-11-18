@@ -1,0 +1,12 @@
+CREATE TYPE "public"."prize_levels" AS ENUM('first_case_checkout', 'first_case_payment', 'case_payment');
+ALTER TABLE "prizes" ADD COLUMN "cases_goal" integer;
+ALTER TABLE "prizes" ADD COLUMN "goal_type" "prize_levels" DEFAULT 'first_case_checkout' NOT NULL;
+ALTER TABLE "events" ADD COLUMN "prize_id" uuid;
+ALTER TABLE "events" ADD COLUMN "street" varchar;
+ALTER TABLE "events" ADD COLUMN "city" varchar;
+ALTER TABLE "events" ADD COLUMN "postal_code" varchar;
+ALTER TABLE "events" ADD COLUMN "state" varchar;
+ALTER TABLE "events" ADD COLUMN "country" varchar DEFAULT 'US';
+ALTER TABLE "events" ADD COLUMN "is_online_event" boolean DEFAULT false NOT NULL;
+ALTER TABLE "events" ADD COLUMN "online_event_url" text;
+ALTER TABLE "events" ADD CONSTRAINT "events_prize_id_prizes_id_fk" FOREIGN KEY ("prize_id") REFERENCES "public"."prizes"("id") ON DELETE no action ON UPDATE no action;

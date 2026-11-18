@@ -1,0 +1,1 @@
+ALTER TABLE "organizations" ADD COLUMN "sf_account_id" varchar;

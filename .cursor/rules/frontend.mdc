@@ -1,0 +1,109 @@
+---
+description: Frontend-specific rules and best practices for UI/UX development
+globs: src/app/**/*.ts,src/app/**/*.tsx,src/components/**/*.ts,src/components/**/*.tsx,src/providers/**/*.ts,src/providers/**/*.tsx
+alwaysApply: false
+---
+
+# Frontend Conventions
+
+## Component Design & Architecture
+
+- Create small, focused, reusable components with single responsibility
+- Prefer functional components over class components
+- Use custom hooks for shared stateful logic
+- Implement proper prop validation and default values
+
+## State Management
+
+- Keep state as close to where it's used as possible
+- Use immutable state updates to prevent side effects
+- Avoid prop drilling - use context or state management libraries when needed
+- Normalize complex state structures
+- Use derived state instead of storing computed values
+- Implement proper state cleanup in useEffect hooks
+
+## Performance Optimization
+
+- Implement proper memoization for expensive calculations
+- Use lazy loading for components and routes
+- Optimize images and media assets
+- Implement virtual scrolling for large lists
+- Avoid unnecessary re-renders with proper dependency arrays
+- Use debouncing and throttling for user input handlers
+- Minimize bundle size with code splitting
+
+## User Experience (UX)
+
+- Implement proper loading states for async operations
+- Provide meaningful error messages and fallback UI
+- Ensure keyboard navigation accessibility
+- Use consistent spacing, typography, and color schemes
+- Implement proper focus management
+- Provide visual feedback for user interactions
+- Design for mobile-first responsive layouts
+
+## Accessibility (A11y)
+
+- Use semantic HTML elements appropriately
+- Provide proper ARIA labels and descriptions
+- Ensure sufficient color contrast ratios
+- Implement keyboard navigation support
+- Use proper heading hierarchy (h1, h2, h3, etc.)
+- Provide alternative text for images
+- Test with screen readers and assistive technologies
+
+## Form Handling
+
+- Implement proper form validation on both client and server
+- Provide real-time validation feedback
+- Use controlled components for form inputs
+- Implement proper error handling and display
+- Provide clear success and error states
+- Use proper input types and attributes
+- Implement proper form submission handling
+
+## Event Handling
+
+- Use event delegation for dynamic content
+- Implement proper event cleanup to prevent memory leaks
+- Use synthetic events when available
+- Implement proper event propagation control
+- Use debouncing for search and input events
+- Handle edge cases in user interactions
+
+## Styling & CSS
+
+- Use CSS custom properties (variables) for consistent theming
+- Implement responsive design with mobile-first approach
+- Use CSS Grid and Flexbox for layouts
+- Avoid inline styles except for dynamic values
+- Implement proper CSS organization and structure
+
+## Data Fetching & API Integration
+
+- Implement proper loading and error states
+- Use proper caching strategies
+- Handle network failures gracefully
+- Implement retry logic for failed requests
+- Use proper data transformation and normalization
+- Implement optimistic updates when appropriate
+- Handle race conditions in async operations
+
+## Security Best Practices
+
+- Sanitize user input before rendering
+- Implement proper CSRF protection
+- Use HTTPS for all communications
+- Implement proper content security policies
+- Avoid storing sensitive data in client-side storage
+- Use proper authentication and authorization checks
+- Implement proper XSS protection
+
+## Browser Compatibility
+
+- Test across different browsers and versions
+- Use feature detection instead of browser detection
+- Implement proper polyfills when needed
+- Use progressive enhancement principles
+- Handle browser-specific quirks appropriately
+- Test on different devices and screen sizes

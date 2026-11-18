@@ -1,0 +1,2 @@
+ALTER TABLE "payment_logs" ADD COLUMN "consumer_id" uuid;
+ALTER TABLE "payment_logs" ADD CONSTRAINT "payment_logs_consumer_id_consumers_id_fk" FOREIGN KEY ("consumer_id") REFERENCES "public"."consumers"("id") ON DELETE no action ON UPDATE no action;

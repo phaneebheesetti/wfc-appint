@@ -1,0 +1,14 @@
+ALTER TABLE "campaigns" DROP CONSTRAINT "check_profit_share_percentage";
+ALTER TABLE "campaigns" DROP CONSTRAINT "check_cases_goal";
+DROP INDEX "idx_campaigns_org_created_at";
+CREATE INDEX "idx_campaigns_name" ON "campaigns" USING btree ("name");
+CREATE INDEX "idx_campaigns_status" ON "campaigns" USING btree ("status");
+CREATE INDEX "idx_campaigns_start_date" ON "campaigns" USING btree ("start_date");
+CREATE INDEX "idx_campaigns_end_date" ON "campaigns" USING btree ("end_date");
+CREATE INDEX "idx_campaigns_deleted_at" ON "campaigns" USING btree ("deleted_at");
+CREATE INDEX "idx_organizations_created_at" ON "organizations" USING btree ("created_at");
+CREATE INDEX "idx_organizations_deleted_at" ON "organizations" USING btree ("deleted_at");
+CREATE INDEX "idx_users_parent_user_id" ON "users" USING btree ("parent_user_id");
+CREATE INDEX "idx_users_invited_by_user_id" ON "users" USING btree ("invited_by_user_id");
+CREATE INDEX "idx_users_created_at" ON "users" USING btree ("created_at");
+CREATE INDEX "idx_users_deleted_at" ON "users" USING btree ("deleted_at");

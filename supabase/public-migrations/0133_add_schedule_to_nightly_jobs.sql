@@ -1,0 +1,1 @@
+ALTER TABLE "nightly_jobs" ADD COLUMN "schedule" jsonb;

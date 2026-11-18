@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns_users" ADD COLUMN "requested_case_transaction_at" timestamp;

@@ -1,0 +1,11 @@
+ALTER TABLE "users" ALTER COLUMN "contact_info_id" DROP NOT NULL;
+ALTER TABLE "users" ADD COLUMN "first_name" varchar;
+ALTER TABLE "users" ADD COLUMN "last_name" varchar;
+ALTER TABLE "users" ADD COLUMN "full_name" varchar;
+ALTER TABLE "users" ADD COLUMN "email" varchar;
+ALTER TABLE "users" ADD COLUMN "phone" varchar;
+ALTER TABLE "users" ADD COLUMN "grade" varchar;
+ALTER TABLE "users" ADD COLUMN "teacher_name" varchar;
+ALTER TABLE "users" ADD COLUMN "encrypted" boolean DEFAULT false;
+ALTER TABLE "users" ADD CONSTRAINT "users_email_unique" UNIQUE("email");
+ALTER TABLE "users" ADD CONSTRAINT "users_phone_unique" UNIQUE("phone");

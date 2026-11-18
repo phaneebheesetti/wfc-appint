@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "clerk_invitation_url" varchar;

@@ -1,0 +1,3 @@
+ALTER TABLE "organizations" ADD COLUMN "fundraising_consultant_user_id" uuid;
+ALTER TABLE "organizations" ADD CONSTRAINT "organizations_fundraising_consultant_user_id_users_id_fk" FOREIGN KEY ("fundraising_consultant_user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+CREATE INDEX "idx_organizations_fundraising_consultant_user_id" ON "organizations" USING btree ("fundraising_consultant_user_id");

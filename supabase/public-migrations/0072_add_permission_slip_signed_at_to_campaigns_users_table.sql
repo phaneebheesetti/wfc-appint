@@ -1,0 +1,1 @@
+ALTER TABLE "campaigns_users" ADD COLUMN "permission_slip_signed_at" timestamp;

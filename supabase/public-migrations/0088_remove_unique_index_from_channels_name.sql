@@ -1,0 +1,2 @@
+-- ALTER TABLE "channels" DROP CONSTRAINT "channels_name_unique";
+-- ALTER TABLE "channels" ALTER COLUMN "name" SET NOT NULL;

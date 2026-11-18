@@ -1,0 +1,184 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ["staging", "main", "pre-prod"]
+    paths:
+      - "**.ts"
+      - "**.tsx"
+      - "e2e/**"
+      - "src/**"
+      - ".github/workflows/ci.yml"
+  push:
+    branches: ["staging", "main", "pre-prod"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-format-typecheck:
+    name: Lint, Format and Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: ${{ github.ref_name == 'main' && 'wfc-prod' || github.ref_name == 'pre-prod' && 'wfc-preprod' || 'wfc-staging' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup repository and dependencies
+        uses: ./.github/actions/setup-node
+
+      - name: Restore ESLint cache
+        id: eslint-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .eslintcache
+          key: ${{ runner.os }}-eslint-${{ hashFiles('eslint.config.mjs', 'yarn.lock') }}-${{ hashFiles('**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs') }}
+
+      - name: Restore TypeScript build info cache
+        id: tsc-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: tsconfig.tsbuildinfo
+          key: ${{ runner.os }}-tsc-${{ hashFiles('yarn.lock', 'tsconfig.json') }}-${{ hashFiles('**/*.ts', '**/*.tsx', 'next-env.d.ts') }}
+
+      - name: Run checks in parallel
+        run: |
+          yarn format:check & p1=$!
+          yarn lint & p2=$!
+          yarn typecheck & p3=$!
+          wait $p1; r1=$?
+          wait $p2; r2=$?
+          wait $p3; r3=$?
+          exit $((r1 | r2 | r3))
+
+      - name: Save ESLint cache
+        if: always() && steps.eslint-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .eslintcache
+          key: ${{ steps.eslint-cache.outputs.cache-primary-key }}
+
+      - name: Save TypeScript build info cache
+        if: always() && steps.tsc-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: tsconfig.tsbuildinfo
+          key: ${{ steps.tsc-cache.outputs.cache-primary-key }}
+
+  e2e:
+    name: E2E
+    if: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: ${{ github.ref_name == 'main' && 'wfc-prod' || github.ref_name == 'pre-prod' && 'wfc-preprod' || 'wfc-staging' }}
+    env:
+      CI: true
+      SKIP_ENV_VALIDATION: "true"
+      NEXT_PUBLIC_SKIP_ENV_VALIDATION: "true"
+      APP_URL: http://localhost:3000
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL: http://localhost:3000/dashboard
+      NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: http://localhost:3000/dashboard
+      NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL: http://localhost:3000/accept-invitation
+      NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: http://localhost:3000/accept-invitation
+      NEXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
+      NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
+      NEXT_PUBLIC_ABLY_API_KEY: ${{ secrets.NEXT_PUBLIC_ABLY_API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup repository and dependencies
+        uses: ./.github/actions/setup-node
+
+      - name: Restore Playwright cache
+        id: playwright-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('yarn.lock', 'node_modules/@playwright/test/package.json') }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: yarn e2e:install:ci
+
+      - name: Save Playwright cache
+        if: always() && steps.playwright-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('yarn.lock', 'node_modules/@playwright/test/package.json') }}
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: "2.20.3"
+
+      - name: Start Supabase
+        run: supabase start
+
+      - name: Wait for Supabase to be ready
+        run: |
+          for _ in $(seq 1 15); do
+            if supabase status -o env 2>/dev/null | grep -q '^DB_URL='; then
+              break
+            fi
+            sleep 2
+          done
+          supabase status -o env | grep -q '^DB_URL=' || (echo "Supabase failed to become ready" && exit 1)
+
+      - name: Set Supabase env vars
+        run: |
+          supabase status -o env > /tmp/supabase.env
+          strip_quotes() { echo "$1" | sed 's/^"//;s/"$//'; }
+          DB_URL="$(strip_quotes "$(grep '^DB_URL=' /tmp/supabase.env | cut -d= -f2-)")"
+          {
+            echo "DATABASE_URL=$DB_URL"
+            echo "DATABASE_MIGRATIONS_URL=$DB_URL"
+            echo "NEXT_PUBLIC_SUPABASE_URL=$(strip_quotes "$(grep '^API_URL=' /tmp/supabase.env | cut -d= -f2-)")"
+            echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=$(strip_quotes "$(grep '^ANON_KEY=' /tmp/supabase.env | cut -d= -f2-)")"
+            echo "SUPABASE_SERVICE_ROLE_KEY=$(strip_quotes "$(grep '^SERVICE_ROLE_KEY=' /tmp/supabase.env | cut -d= -f2-)")"
+          } >> "$GITHUB_ENV"
+
+      - name: Run database migrations and seed
+        run: yarn db:migrate && yarn db:seed
+
+      - name: Prepare E2E env
+        run: |
+          echo "SKIP_ENV_VALIDATION=true" >> .env
+          echo "NEXT_PUBLIC_SKIP_ENV_VALIDATION=true" >> .env
+
+      - name: Run E2E tests
+        env:
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }}
+          SKIP_ENV_VALIDATION: "true"
+          NEXT_PUBLIC_SKIP_ENV_VALIDATION: "true"
+        run: yarn e2e:test:ci
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
